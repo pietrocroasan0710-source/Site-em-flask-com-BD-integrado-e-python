@@ -1,4 +1,5 @@
 /* Dados dos jogos, so um exemplo a ideia e colocar eles atraves do jinja  =)*/
+
 const jogos=[
  {id:1,t:"Hollow Orbit",g:"Aventura",p:["PC","Switch"],n:5,c:["#ff5d8f","#6a3de8"]},
  {id:2,t:"Turbo Rally X",g:"Corrida",p:["PC","PlayStation","Xbox"],n:4,c:["#ffc857","#ff5d3a"]},
@@ -12,6 +13,18 @@ const jogos=[
 const gens=["Todos",...new Set(jogos.map(j=>j.g))];
 let gen="Todos";const favs=new Set();
 const $=id=>document.getElementById(id);
+/* tema: escolha salva ou preferência do sistema */
+const sistemaClaro=matchMedia("(prefers-color-scheme: light)");
+const ehClaro=()=>{const t=document.documentElement.dataset.theme;return t?t==="light":sistemaClaro.matches};
+function rotuloTema(){$("tema").textContent=ehClaro()?"☾ Escuro":"☀ Claro"}
+$("tema").onclick=()=>{
+  const novo=ehClaro()?"dark":"light";
+  document.documentElement.dataset.theme=novo;
+  try{localStorage.setItem("tema",novo)}catch(e){}
+  rotuloTema();document.dispatchEvent(new Event("temamudou"));
+};
+sistemaClaro.addEventListener("change",()=>{rotuloTema();document.dispatchEvent(new Event("temamudou"))});
+rotuloTema();
 const calmo=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 function chips(){
@@ -67,14 +80,14 @@ document.querySelectorAll(".rv").forEach(el=>io.observe(el));
 
 /* fundo espacial: estrelas com paralaxe, brilho e estrelas cadentes */
 (function(){
-  const cv=$("bg"),cx=cv.getContext("2d"),claro=matchMedia("(prefers-color-scheme: light)");
+  const cv=$("bg"),cx=cv.getContext("2d");
   let w,h,est=[],met=[],mx=0,my=0,alvoX=0,alvoY=0;
   function tam(){
     w=cv.width=innerWidth;h=cv.height=innerHeight;
     est=Array.from({length:Math.round(w*h/5500)},()=>({x:Math.random()*w,y:Math.random()*h,z:.15+Math.random()*.85,f:Math.random()*6.28,c:Math.random()}));
   }
   function frame(t){
-    const lc=claro.matches;
+    const lc=ehClaro();
     mx+=(alvoX-mx)*.05;my+=(alvoY-my)*.05;
     cx.clearRect(0,0,w,h);
     est.forEach(s=>{
@@ -103,9 +116,19 @@ document.querySelectorAll(".rv").forEach(el=>io.observe(el));
   tam();
   addEventListener("resize",()=>{tam();if(calmo)frame(0)});
   if(!calmo)addEventListener("mousemove",e=>{alvoX=e.clientX/w-.5;alvoY=e.clientY/h-.5});
-  claro.addEventListener("change",()=>{if(calmo)frame(0)});
+  document.addEventListener("temamudou",()=>{if(calmo)frame(0)});
   frame(0);
 })();
 
 $("q").oninput=render;$("plat").onchange=render;
 chips();render();ranking();
+
+/* menu do celular */
+const nav=$("nav"),menu=$("menu");
+menu.onclick=()=>{const a=nav.classList.toggle("open");menu.setAttribute("aria-expanded",a)};
+nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{nav.classList.remove("open");menu.setAttribute("aria-expanded","false")}));
+
+/* botão voltar ao topo */
+const topo=$("topo");
+addEventListener("scroll",()=>topo.classList.toggle("on",scrollY>500),{passive:true});
+topo.onclick=()=>scrollTo({top:0,behavior:calmo?"auto":"smooth"});
