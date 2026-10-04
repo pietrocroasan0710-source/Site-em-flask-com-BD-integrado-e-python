@@ -10,6 +10,10 @@
 <script src="../JAVA/script.js" defer></script>
 </head>
 <body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="glow g1" aria-hidden="true"></div>
+<div class="glow g2" aria-hidden="true"></div>
+
 <header>
   <a class="logo" href="/">Pixel<span>Shelf</span></a>
   <nav>
@@ -32,18 +36,63 @@
       <option>PC</option><option>PlayStation</option><option>Xbox</option><option>Switch</option><option>Mobile</option>
     </select>
   </form>
+  <div class="stats">
+    <div><b data-count="1280">0</b><span>jogos cadastrados</span></div>
+    <div><b data-count="342">0</b><span>jogadores</span></div>
+    <div><b data-count="5400">0</b><span>avaliações</span></div>
+  </div>
 </section>
 
-<main>
-  <div class="section-title"><h2>Gêneros</h2></div>
-  <div class="chips" id="chips"></div>
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>PC</span><span>PlayStation</span><span>Xbox</span><span>Switch</span><span>Mobile</span>
+    <span>PC</span><span>PlayStation</span><span>Xbox</span><span>Switch</span><span>Mobile</span>
+    <span>PC</span><span>PlayStation</span><span>Xbox</span><span>Switch</span><span>Mobile</span>
+    <span>PC</span><span>PlayStation</span><span>Xbox</span><span>Switch</span><span>Mobile</span>
+  </div>
+</div>
 
-  <div class="section-title"><h2>Jogos em destaque</h2><small id="count"></small></div>
+<main>
+  <section class="spot rv">
+    <div class="spot-art"></div>
+    <div class="spot-txt">
+      <h2>Jogo do mês: Hollow Orbit</h2>
+      <p>Explore uma estação espacial abandonada, resolva enigmas de gravidade e descubra por que ninguém voltou de lá.</p>
+      <div class="stars">★★★★★</div>
+      <a class="btn primary" href="/jogos/1">Ver detalhes</a>
+    </div>
+  </section>
+
+  <div class="section-title rv"><h2>Gêneros</h2></div>
+  <div class="chips rv" id="chips"></div>
+
+  <div class="section-title rv"><h2>Jogos em destaque</h2><small id="count"></small></div>
   <div class="grid" id="grid"></div>
+
+  <div class="section-title rv"><h2>Mais bem avaliados</h2></div>
+  <ol class="rank rv" id="rank"></ol>
+
+  <div class="section-title rv"><h2>Como funciona</h2></div>
+  <div class="steps">
+    <div class="step rv"><i>1</i><h3>Crie sua conta</h3><p>Cadastre-se grátis para avaliar, comentar e favoritar.</p></div>
+    <div class="step rv"><i>2</i><h3>Explore e cadastre</h3><p>Busque no catálogo ou adicione um jogo que ainda não está nele.</p></div>
+    <div class="step rv"><i>3</i><h3>Avalie e comente</h3><p>Dê sua nota, escreva sua opinião e guarde seus favoritos.</p></div>
+  </div>
+
+  <section class="cta rv">
+    <h2>Pronto para montar sua estante?</h2>
+    <p>Crie sua conta e comece a guardar os jogos que você ama.</p>
+    <a class="btn primary" href="/registro">Criar conta grátis</a>
+  </section>
 </main>
 
-<footer>PixelShelf — projeto Flask · Os jogos abaixo são exemplos; no Flask, troque pela lista vinda do banco de dados.</footer>
-
-
+<footer>
+  <div class="foot">
+    <div><a class="logo" href="/">Pixel<span>Shelf</span></a><p>Catálogo de jogos feito com Flask e banco de dados.</p></div>
+    <div><h4>Site</h4><a href="/jogos">Jogos</a><a href="/favoritos">Favoritos</a><a href="/jogos/novo">Cadastrar jogo</a></div>
+    <div><h4>Conta</h4><a href="/login">Entrar</a><a href="/registro">Criar conta</a></div>
+  </div>
+  <!-- ai agente coloca os jogos sendo puxados pelo flask ou um json talvez -->
+</footer>
 </body>
 </html>
