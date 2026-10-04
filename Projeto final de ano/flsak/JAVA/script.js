@@ -1,4 +1,4 @@
-/* Dados de exemplo. No Flask dá pra gerar isso com Jinja a partir do banco. */
+/* Dados dos jogos, so um exemplo a ideia e colocar eles atraves do jinja  =)*/
 const jogos=[
  {id:1,t:"Hollow Orbit",g:"Aventura",p:["PC","Switch"],n:5,c:["#ff5d8f","#6a3de8"]},
  {id:2,t:"Turbo Rally X",g:"Corrida",p:["PC","PlayStation","Xbox"],n:4,c:["#ffc857","#ff5d3a"]},
@@ -65,26 +65,46 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{
 }),{threshold:.15});
 document.querySelectorAll(".rv").forEach(el=>io.observe(el));
 
-/* fundo animado: quadradinhos (pixels) flutuando */
+/* fundo espacial: estrelas com paralaxe, brilho e estrelas cadentes */
 (function(){
-  if(calmo)return;
-  const cv=$("bg"),cx=cv.getContext("2d"),cores=["#ff5d8f","#3de0d0","#ffc857","#9b5de5"];
-  let w,h,ps=[];
-  function tam(){w=cv.width=innerWidth;h=cv.height=innerHeight}
-  function nova(y){return{x:Math.random()*w,y:y??Math.random()*h,s:3+Math.random()*7,v:.15+Math.random()*.45,
-    c:cores[Math.floor(Math.random()*cores.length)],f:Math.random()*6.28}}
-  tam();addEventListener("resize",tam);
-  ps=Array.from({length:55},()=>nova());
-  (function loop(t){
+  const cv=$("bg"),cx=cv.getContext("2d"),claro=matchMedia("(prefers-color-scheme: light)");
+  let w,h,est=[],met=[],mx=0,my=0,alvoX=0,alvoY=0;
+  function tam(){
+    w=cv.width=innerWidth;h=cv.height=innerHeight;
+    est=Array.from({length:Math.round(w*h/5500)},()=>({x:Math.random()*w,y:Math.random()*h,z:.15+Math.random()*.85,f:Math.random()*6.28,c:Math.random()}));
+  }
+  function frame(t){
+    const lc=claro.matches;
+    mx+=(alvoX-mx)*.05;my+=(alvoY-my)*.05;
     cx.clearRect(0,0,w,h);
-    ps.forEach((p,i)=>{
-      p.y-=p.v;p.x+=Math.sin(t/2000+p.f)*.25;
-      if(p.y<-12)ps[i]=nova(h+12);
-      cx.globalAlpha=.12+.18*Math.abs(Math.sin(t/1200+p.f));
-      cx.fillStyle=p.c;cx.fillRect(p.x,p.y,p.s,p.s);
+    est.forEach(s=>{
+      if(!calmo){s.x-=s.z*.15;if(s.x<-2)s.x=w+2}
+      const brilho=calmo?.7:.5+.5*Math.sin(t/650+s.f);
+      cx.globalAlpha=Math.min(1,(lc?.3:.2)+brilho*s.z*(lc?.6:.8));
+      cx.fillStyle=lc?(s.c<.6?"#4a3fb0":"#d92d6b"):(s.c<.7?"#ffffff":s.c<.85?"#9ad7ff":"#ffb3d1");
+      cx.beginPath();cx.arc(s.x+mx*s.z*40,s.y+my*s.z*40,s.z*1.7,0,6.283);cx.fill();
     });
-    requestAnimationFrame(loop);
-  })(0);
+    if(!calmo){
+      if(Math.random()<.006&&met.length<2){
+        const r=Math.random();
+        met.push({x:w*(.3+Math.random()*.7),y:Math.random()*h*.35,vx:-(7+r*4),vy:3.5+r*2,vida:60});
+      }
+      met=met.filter(m=>{
+        m.x+=m.vx;m.y+=m.vy;m.vida--;
+        const g=cx.createLinearGradient(m.x,m.y,m.x-m.vx*7,m.y-m.vy*7);
+        g.addColorStop(0,lc?"#d92d6b":"#ffffff");g.addColorStop(1,"rgba(255,255,255,0)");
+        cx.globalAlpha=Math.min(1,m.vida/30);cx.strokeStyle=g;cx.lineWidth=2;
+        cx.beginPath();cx.moveTo(m.x,m.y);cx.lineTo(m.x-m.vx*7,m.y-m.vy*7);cx.stroke();
+        return m.vida>0;
+      });
+      requestAnimationFrame(frame);
+    }
+  }
+  tam();
+  addEventListener("resize",()=>{tam();if(calmo)frame(0)});
+  if(!calmo)addEventListener("mousemove",e=>{alvoX=e.clientX/w-.5;alvoY=e.clientY/h-.5});
+  claro.addEventListener("change",()=>{if(calmo)frame(0)});
+  frame(0);
 })();
 
 $("q").oninput=render;$("plat").onchange=render;

@@ -1,18 +1,57 @@
-
 :root {
-    --bg: #171433;
-    --panel: #231f4a;
+    color-scheme: dark;
+
+    --bg: #0d0b24;
+    --panel: rgba(35, 31, 74, 0.82);
     --line: #383070;
     --text: #f1eeff;
     --muted: #a9a3d6;
+
     --pink: #ff5d8f;
     --cyan: #3de0d0;
     --gold: #ffc857;
+
+    --hdr: rgba(13, 11, 36, 0.78);
+
+    --on-pink: #2a0b17;
+    --on-cyan: #06302c;
+
+    --glow: 0.3;
 }
 
-/* =========================
-   RESET / BASE
-========================= */
+
+/* ========================================
+   TEMA CLARO
+   Segue a preferência do sistema/navegador
+======================================== */
+
+@media (prefers-color-scheme: light) {
+    :root {
+        color-scheme: light;
+
+        --bg: #eeeaff;
+        --panel: rgba(255, 255, 255, 0.85);
+        --line: #d6cff4;
+        --text: #1d1840;
+        --muted: #5a5586;
+
+        --pink: #d92d6b;
+        --cyan: #0b8277;
+        --gold: #c47f00;
+
+        --hdr: rgba(238, 234, 255, 0.82);
+
+        --on-pink: #fff;
+        --on-cyan: #fff;
+
+        --glow: 0.38;
+    }
+}
+
+
+/* ========================================
+   RESET / CONFIGURAÇÕES GERAIS
+======================================== */
 
 * {
     box-sizing: border-box;
@@ -31,6 +70,11 @@ body {
     overflow-x: hidden;
 }
 
+body::selection {
+    background: var(--pink);
+    color: #fff;
+}
+
 a {
     color: inherit;
     text-decoration: none;
@@ -41,9 +85,10 @@ a {
     outline-offset: 2px;
 }
 
-/* =========================
+
+/* ========================================
    FUNDO ANIMADO
-========================= */
+======================================== */
 
 #bg {
     position: fixed;
@@ -60,7 +105,7 @@ a {
     height: 50vmax;
     border-radius: 50%;
     filter: blur(90px);
-    opacity: 0.28;
+    opacity: var(--glow);
     pointer-events: none;
 }
 
@@ -71,14 +116,24 @@ a {
 }
 
 .g2 {
-    background: #4361ee;
+    background: #6a3de8;
     bottom: -22vmax;
     right: -15vmax;
 }
 
-/* =========================
+.g3 {
+    background: var(--cyan);
+    top: 35vh;
+    left: 40vw;
+    width: 30vmax;
+    height: 30vmax;
+    opacity: calc(var(--glow) * 0.55);
+}
+
+
+/* ========================================
    HEADER / NAVEGAÇÃO
-========================= */
+======================================== */
 
 header {
     position: sticky;
@@ -96,7 +151,7 @@ header {
 
     flex-wrap: wrap;
 
-    background: rgba(23, 20, 51, 0.78);
+    background: var(--hdr);
     backdrop-filter: blur(10px);
 }
 
@@ -112,8 +167,8 @@ header {
 
 nav {
     display: flex;
-    gap: 18px;
     align-items: center;
+    gap: 18px;
     flex-wrap: wrap;
 }
 
@@ -125,9 +180,10 @@ nav a:hover {
     color: var(--text);
 }
 
-/* =========================
+
+/* ========================================
    BOTÕES
-========================= */
+======================================== */
 
 .btn {
     display: inline-block;
@@ -137,8 +193,9 @@ nav a:hover {
     border-radius: 10px;
     border: 1px solid var(--line);
 
-    font-weight: 600;
     color: var(--text);
+
+    font-weight: 600;
 }
 
 .btn:hover {
@@ -148,20 +205,21 @@ nav a:hover {
 .btn.primary {
     background: var(--pink);
     border-color: var(--pink);
-    color: #2a0b17;
+    color: var(--on-pink);
 }
 
 .btn.primary:hover {
     box-shadow: 0 0 22px rgba(255, 93, 143, 0.55);
 }
 
-/* =========================
+
+/* ========================================
    HERO
-========================= */
+======================================== */
 
 .hero {
-    padding: 64px 5vw 30px;
     max-width: 980px;
+    padding: 64px 5vw 30px;
 }
 
 .hero h1 {
@@ -172,35 +230,38 @@ nav a:hover {
 }
 
 .hero p {
-    color: var(--muted);
-    margin: 16px 0 26px;
     max-width: 52ch;
+    margin: 16px 0 26px;
+    color: var(--muted);
 }
 
-/* =========================
+
+/* ========================================
    BUSCA
-========================= */
+======================================== */
 
 .search {
     display: flex;
     gap: 10px;
-    flex-wrap: wrap;
+
+    padding: 12px;
 
     background: var(--panel);
     border: 1px solid var(--line);
-
-    padding: 12px;
     border-radius: 16px;
+
+    flex-wrap: wrap;
 }
 
 .search input,
 .search select {
+    padding: 12px 14px;
+
     background: var(--bg);
     border: 1px solid var(--line);
-    color: var(--text);
-
-    padding: 12px 14px;
     border-radius: 10px;
+
+    color: var(--text);
 
     font: inherit;
 }
@@ -217,24 +278,27 @@ nav a:hover {
     border-color: var(--cyan);
 }
 
-/* =========================
+
+/* ========================================
    ESTATÍSTICAS
-========================= */
+======================================== */
 
 .stats {
     display: flex;
     gap: 34px;
-    flex-wrap: wrap;
+
     margin-top: 30px;
+
+    flex-wrap: wrap;
 }
 
 .stats b {
     display: block;
 
+    color: var(--cyan);
+
     font-size: 1.9rem;
     font-weight: 800;
-
-    color: var(--cyan);
 }
 
 .stats span {
@@ -242,43 +306,10 @@ nav a:hover {
     font-size: 0.9rem;
 }
 
-/* =========================
-   MARQUEE
-========================= */
 
-.marquee {
-    overflow: hidden;
-
-    border-block: 1px solid var(--line);
-
-    background: rgba(35, 31, 74, 0.55);
-
-    margin-top: 30px;
-}
-
-.track {
-    display: flex;
-    width: max-content;
-    gap: 48px;
-    padding: 14px 0;
-}
-
-.track span {
-    font-weight: 800;
-    font-size: 1.1rem;
-
-    color: var(--muted);
-
-    white-space: nowrap;
-}
-
-.track span:nth-child(odd) {
-    color: var(--text);
-}
-
-/* =========================
+/* ========================================
    MAIN / SEÇÕES
-========================= */
+======================================== */
 
 main {
     padding: 0 5vw 60px;
@@ -286,8 +317,8 @@ main {
 
 .section-title {
     display: flex;
-    justify-content: space-between;
     align-items: baseline;
+    justify-content: space-between;
 
     margin: 44px 0 16px;
 }
@@ -300,13 +331,15 @@ main {
     color: var(--muted);
 }
 
-/* =========================
-   SPOTLIGHT
-========================= */
+
+/* ========================================
+   DESTAQUE
+======================================== */
 
 .spot {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
+
     gap: 0;
 
     margin-top: 44px;
@@ -331,14 +364,13 @@ main {
 }
 
 .spot-txt {
-    padding: 28px;
-
     display: flex;
     flex-direction: column;
-    gap: 12px;
-
     align-items: flex-start;
     justify-content: center;
+    gap: 12px;
+
+    padding: 28px;
 }
 
 .spot-txt h2 {
@@ -347,13 +379,14 @@ main {
 }
 
 .spot-txt p {
-    color: var(--muted);
     max-width: 46ch;
+    color: var(--muted);
 }
 
-/* =========================
+
+/* ========================================
    CHIPS / FILTROS
-========================= */
+======================================== */
 
 .chips {
     display: flex;
@@ -364,8 +397,8 @@ main {
 .chip {
     padding: 7px 14px;
 
-    border-radius: 99px;
     border: 1px solid var(--line);
+    border-radius: 99px;
 
     background: transparent;
     color: var(--muted);
@@ -383,17 +416,20 @@ main {
 .chip.on {
     background: var(--cyan);
     border-color: var(--cyan);
-    color: #06302c;
+
+    color: var(--on-cyan);
 
     font-weight: 600;
 }
 
-/* =========================
-   CARDS
-========================= */
+
+/* ========================================
+   GRID / CARDS
+======================================== */
 
 .grid {
     display: grid;
+
     grid-template-columns: repeat(
         auto-fill,
         minmax(210px, 1fr)
@@ -403,32 +439,37 @@ main {
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
+
     background: var(--panel);
     border: 1px solid var(--line);
     border-radius: 16px;
 
     overflow: hidden;
-
-    display: flex;
-    flex-direction: column;
 }
 
 .cover {
-    height: 130px;
+    position: relative;
 
     display: flex;
     align-items: flex-end;
 
+    height: 130px;
+
     padding: 12px;
 
-    font-weight: 800;
-    font-size: 1.25rem;
-    line-height: 1.1;
-
-    position: relative;
-
     background-size: 200% 200%;
+
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.1;
 }
+
+
+/* ========================================
+   FAVORITOS
+======================================== */
 
 .fav {
     position: absolute;
@@ -438,8 +479,8 @@ main {
     width: 36px;
     height: 36px;
 
-    border-radius: 50%;
     border: 0;
+    border-radius: 50%;
 
     background: rgba(23, 20, 51, 0.65);
     color: #fff;
@@ -453,14 +494,19 @@ main {
     color: var(--pink);
 }
 
-.info {
-    padding: 14px;
 
+/* ========================================
+   INFORMAÇÕES DOS CARDS
+======================================== */
+
+.info {
     display: flex;
     flex-direction: column;
     gap: 6px;
 
     flex: 1;
+
+    padding: 14px;
 }
 
 .meta {
@@ -475,27 +521,31 @@ main {
 
 .info .btn {
     margin-top: auto;
-    text-align: center;
+
     padding: 8px;
+
+    text-align: center;
 }
 
 .empty {
-    color: var(--muted);
     padding: 30px 0;
+    color: var(--muted);
 }
 
-/* =========================
+
+/* ========================================
    RANKING
-========================= */
+======================================== */
 
 .rank {
-    list-style: none;
-    padding: 0;
-
     display: grid;
     gap: 10px;
 
     max-width: 640px;
+
+    padding: 0;
+
+    list-style: none;
 }
 
 .rank li {
@@ -503,29 +553,29 @@ main {
     align-items: center;
     gap: 14px;
 
+    padding: 10px 14px;
+
     background: var(--panel);
     border: 1px solid var(--line);
-
     border-radius: 12px;
-
-    padding: 10px 14px;
 }
 
 .rank em {
-    font-style: normal;
-    font-weight: 800;
+    width: 1.6rem;
 
     color: var(--gold);
 
-    width: 1.6rem;
+    font-style: normal;
+    font-weight: 800;
 }
 
 .rank .dot {
+    flex: none;
+
     width: 34px;
     height: 34px;
 
     border-radius: 8px;
-    flex: none;
 }
 
 .rank span {
@@ -535,12 +585,14 @@ main {
     font-size: 0.85rem;
 }
 
-/* =========================
-   PASSOS
-========================= */
+
+/* ========================================
+   PASSOS / ETAPAS
+======================================== */
 
 .steps {
     display: grid;
+
     grid-template-columns: repeat(
         auto-fit,
         minmax(220px, 1fr)
@@ -550,12 +602,11 @@ main {
 }
 
 .step {
+    padding: 20px;
+
     background: var(--panel);
     border: 1px solid var(--line);
-
     border-radius: 16px;
-
-    padding: 20px;
 }
 
 .step i {
@@ -565,34 +616,35 @@ main {
     width: 36px;
     height: 36px;
 
+    margin-bottom: 10px;
+
     border-radius: 50%;
 
     background: var(--pink);
-    color: #2a0b17;
+    color: var(--on-pink);
 
     font-style: normal;
     font-weight: 800;
-
-    margin-bottom: 10px;
 }
 
 .step p {
     color: var(--muted);
 }
 
-/* =========================
+
+/* ========================================
    CTA
-========================= */
+======================================== */
 
 .cta {
     margin-top: 50px;
 
-    text-align: center;
-
     padding: 44px 20px;
 
-    border-radius: 20px;
+    text-align: center;
+
     border: 1px solid var(--line);
+    border-radius: 20px;
 
     background: linear-gradient(
         135deg,
@@ -602,26 +654,28 @@ main {
 }
 
 .cta p {
-    color: var(--muted);
     margin: 8px 0 18px;
+    color: var(--muted);
 }
 
-/* =========================
+
+/* ========================================
    FOOTER
-========================= */
+======================================== */
 
 footer {
-    border-top: 1px solid var(--line);
-
     padding: 30px 5vw 24px;
+
+    border-top: 1px solid var(--line);
 
     color: var(--muted);
 
-    background: rgba(23, 20, 51, 0.8);
+    background: var(--hdr);
 }
 
 .foot {
     display: grid;
+
     grid-template-columns: 2fr 1fr 1fr;
 
     gap: 24px;
@@ -630,8 +684,8 @@ footer {
 }
 
 .foot h4 {
-    color: var(--text);
     margin-bottom: 6px;
+    color: var(--text);
 }
 
 .foot a:not(.logo) {
@@ -647,9 +701,10 @@ footer small {
     font-size: 0.85rem;
 }
 
-/* =========================
+
+/* ========================================
    RESPONSIVIDADE
-========================= */
+======================================== */
 
 @media (max-width: 700px) {
     .spot,
@@ -658,11 +713,12 @@ footer small {
     }
 }
 
-/* =========================
+
+/* ========================================
    ANIMAÇÕES
-   Só funcionam quando o
-   usuário não prefere menos movimento
-========================= */
+   Só funcionam se o usuário não pedir
+   redução de movimento
+======================================== */
 
 @media (prefers-reduced-motion: no-preference) {
 
@@ -677,11 +733,16 @@ footer small {
         animation-direction: alternate-reverse;
     }
 
+    .g3 {
+        animation-duration: 30s;
+    }
+
     @keyframes float {
         to {
             transform: translate(8vmax, 6vmax) scale(1.15);
         }
     }
+
 
     /* Entrada do Hero */
 
@@ -690,6 +751,7 @@ footer small {
     .search,
     .stats {
         opacity: 0;
+
         animation: in 0.7s ease forwards;
     }
 
@@ -717,26 +779,12 @@ footer small {
         }
     }
 
-    /* Marquee */
-
-    .track {
-        animation: scroll 28s linear infinite;
-    }
-
-    .marquee:hover .track {
-        animation-play-state: paused;
-    }
-
-    @keyframes scroll {
-        to {
-            transform: translateX(-50%);
-        }
-    }
 
     /* Reveal */
 
     .rv {
         opacity: 0;
+
         transform: translateY(26px);
 
         transition:
@@ -748,6 +796,7 @@ footer small {
         opacity: 1;
         transform: none;
     }
+
 
     /* Cards */
 
@@ -771,6 +820,7 @@ footer small {
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
     }
 
+
     /* Capas */
 
     .cover,
@@ -783,6 +833,7 @@ footer small {
             background-position: 100% 100%;
         }
     }
+
 
     /* Favoritos */
 
@@ -804,6 +855,7 @@ footer small {
         }
     }
 
+
     /* Steps */
 
     .step {
@@ -813,6 +865,7 @@ footer small {
     .step:hover {
         transform: translateY(-4px);
     }
+
 
     /* Ranking */
 
@@ -824,4 +877,3 @@ footer small {
         transform: translateX(6px);
     }
 }
-
