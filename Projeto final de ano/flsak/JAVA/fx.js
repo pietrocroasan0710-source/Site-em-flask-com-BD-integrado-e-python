@@ -1,4 +1,4 @@
-/* fx.js — compartilhado por todas as páginas: tema claro/escuro + fundo espacial */
+/* fx.js — compartilhado por todas as páginas: tema claro/escuro +  o fundo de burac negro */
 const $=id=>document.getElementById(id);
 const calmo=matchMedia("(prefers-reduced-motion: reduce)").matches;
 

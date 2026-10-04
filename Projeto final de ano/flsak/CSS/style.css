@@ -1083,3 +1083,10 @@ footer small {
   .halo{animation:pulso 4s ease-in-out infinite alternate}
   @keyframes pulso{to{box-shadow:0 0 48px 14px rgba(255,150,110,.7),inset 0 0 40px 10px rgba(255,150,110,.5)}}
 }
+/* estilos extras do cadastro*/
+.forca{display:flex;gap:6px;margin-top:8px}
+.forca i{flex:1;height:5px;border-radius:3px;background:var(--line);transition:background .2s}
+.forca[data-n="1"] i:nth-child(-n+1){background:var(--pink)}
+.forca[data-n="2"] i:nth-child(-n+2){background:var(--gold)}
+.forca[data-n="3"] i:nth-child(-n+3),.forca[data-n="4"] i:nth-child(-n+4){background:var(--cyan)}
+.dica{display:block;margin-top:5px;color:var(--muted);font-size:.8rem}

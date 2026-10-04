@@ -1,6 +1,4 @@
 /* Dados dos jogos, so um exemplo a ideia e colocar eles atraves do jinja  =)*/
-
-/* Depende do fx.js (carregar antes). Dados de exemplo. No Flask dá pra gerar isso com Jinja a partir do banco. */
 const jogos=[
  {id:1,t:"Hollow Orbit",g:"Aventura",p:["PC","Switch"],n:5,c:["#ff5d8f","#6a3de8"]},
  {id:2,t:"Turbo Rally X",g:"Corrida",p:["PC","PlayStation","Xbox"],n:4,c:["#ffc857","#ff5d3a"]},
