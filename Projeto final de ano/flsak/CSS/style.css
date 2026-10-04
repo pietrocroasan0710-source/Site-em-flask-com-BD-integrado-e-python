@@ -1044,3 +1044,42 @@ footer small {
     text-align: center;
   }
 }
+/* ---------- login ---------- */
+@property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
+.auth{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;min-height:calc(100vh - 70px);padding:30px 5vw}
+.cena{display:grid;justify-items:center;gap:14px;text-align:center}
+.cena h2{font-size:clamp(1.6rem,3.4vw,2.4rem);line-height:1.1;letter-spacing:-.02em;margin-top:18px}
+.cena p{color:var(--muted);max-width:34ch}
+.bh{position:relative;width:min(72vw,360px);aspect-ratio:1}
+.bh>*{position:absolute;border-radius:50%}
+.halo{inset:17%;border:3px solid rgba(255,214,170,.9);box-shadow:0 0 34px 8px rgba(255,150,110,.55),inset 0 0 34px 8px rgba(255,150,110,.4)}
+.core{inset:19%;background:#000;box-shadow:0 0 50px 14px rgba(0,0,0,.85)}
+.disk{left:-14%;right:-14%;top:35%;bottom:35%;transform:rotate(-14deg);filter:blur(5px);
+  background:conic-gradient(from var(--a),#ff5d8f,#ffc857,#fff,#3de0d0,#6a3de8,#ff5d8f);
+  -webkit-mask:radial-gradient(closest-side,transparent 50%,#000 60%,#000 78%,transparent 100%);
+  mask:radial-gradient(closest-side,transparent 50%,#000 60%,#000 78%,transparent 100%)}
+.form-box{width:100%;max-width:440px;justify-self:center;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:30px;backdrop-filter:blur(10px)}
+.form-box h1{font-size:2rem;letter-spacing:-.02em}
+.sub{color:var(--muted);margin:4px 0 18px}
+.form-box label{display:block;margin-top:14px;font-weight:600;font-size:.9rem}
+.form-box input[type=email],.form-box input[type=password],.form-box input[type=text]{width:100%;margin-top:6px;background:var(--bg);border:1px solid var(--line);color:var(--text);padding:12px 14px;border-radius:10px;font:inherit}
+.form-box input:focus{border-color:var(--cyan)}
+.form-box input.inv{border-color:var(--pink)}
+.senha{position:relative}
+.senha input{padding-right:84px!important}
+.senha button{position:absolute;right:8px;top:calc(50% + 3px);transform:translateY(-50%);background:none;border:0;color:var(--muted);font:inherit;font-size:.85rem;cursor:pointer;padding:6px}
+.senha button:hover{color:var(--cyan)}
+.msg{display:block;min-height:1.2em;margin-top:4px;color:var(--pink);font-size:.85rem}
+.lembrar{display:flex!important;align-items:center;gap:8px;font-weight:400!important;color:var(--muted)}
+.enviar{width:100%;margin-top:18px;padding:12px;font:inherit;font-weight:700;cursor:pointer}
+.troca{margin-top:18px;text-align:center;color:var(--muted)}
+.troca a{color:var(--cyan);font-weight:600}
+.aviso{padding:10px 14px;border-radius:10px;border:1px solid var(--cyan);background:rgba(61,224,208,.12);margin-bottom:6px;font-size:.9rem}
+.aviso[hidden]{display:none}
+@media (max-width:800px){.auth{grid-template-columns:1fr;gap:20px}.bh{width:min(56vw,240px)}}
+@media (prefers-reduced-motion:no-preference){
+  .disk{animation:giro 7s linear infinite}
+  @keyframes giro{to{--a:360deg}}
+  .halo{animation:pulso 4s ease-in-out infinite alternate}
+  @keyframes pulso{to{box-shadow:0 0 48px 14px rgba(255,150,110,.7),inset 0 0 40px 10px rgba(255,150,110,.5)}}
+}

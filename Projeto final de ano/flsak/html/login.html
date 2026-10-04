@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entrar — PixelShelf</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23ff5d8f'/%3E%3Crect x='9' y='9' width='14' height='14' fill='%23171433'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<script>try{var t=localStorage.getItem("tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="../CSS/style.css">
+<link rel="stylesheet" href="../CSS/login.css">
+<script src="../JAVA/fx.js" defer></script>
+<script src="../JAVA/login.js" defer></script>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="glow g1" aria-hidden="true"></div>
+<div class="glow g2" aria-hidden="true"></div>
+<div class="glow g3" aria-hidden="true"></div>
+
+<header>
+  <a class="logo" href="/">Pixel<span>Shelf</span></a>
+  <button class="btn tema" id="tema" type="button" aria-label="Alternar entre tema claro e escuro"></button>
+</header>
+
+<main class="auth">
+  <section class="cena" aria-hidden="true">
+    <div class="bh"><div class="halo"></div><div class="core"></div><div class="disk"></div></div>
+    <h2>Seus jogos, na sua órbita.</h2>
+    <p>Entre para avaliar, comentar e guardar seus favoritos.</p>
+  </section>
+
+  <section class="form-box">
+    <h1>Entrar</h1>
+    <p class="sub">Use o e-mail da sua conta.</p>
+    <!-- Flask: mostrar aqui as mensagens do flash(), ex.: "E-mail ou senha incorretos" -->
+    <div class="aviso" id="aviso" role="alert" hidden></div>
+    <form id="form" method="post" action="/login" novalidate>
+      <label for="email">E-mail</label>
+      <input id="email" name="email" type="email" autocomplete="email" placeholder="nome@email.com">
+      <small class="msg" id="e-email"></small>
+
+      <label for="senha">Senha</label>
+      <div class="senha">
+        <input id="senha" name="senha" type="password" autocomplete="current-password" placeholder="Sua senha">
+        <button type="button" id="ver" aria-label="Mostrar senha">Mostrar</button>
+      </div>
+      <small class="msg" id="e-senha"></small>
+
+      <label class="lembrar"><input type="checkbox" name="lembrar"> Lembrar de mim</label>
+      <button class="btn primary enviar" type="submit">Entrar</button>
+    </form>
+    <p class="troca">Ainda não tem conta? <a href="/registro">Criar conta</a></p>
+  </section>
+</main>
+</body>
+</html>
