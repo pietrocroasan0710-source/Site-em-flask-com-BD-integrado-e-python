@@ -2,7 +2,7 @@
 # instalar = pip install flask
 
 # Importar
-from flask import Flask
+from flask import Flask, render_template, redirect
 
 #construir app
 app = Flask(__name__)
