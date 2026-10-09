@@ -58,3 +58,10 @@ rotuloTema();
   document.addEventListener("temamudou",()=>{if(calmo)frame(0)});
   frame(0);
 })();
+
+/* menu do celular (só nas páginas que têm o cabeçalho completo) */
+(function(){
+  const m=$("menu"),n=$("nav");if(!m||!n)return;
+  m.onclick=()=>{const a=n.classList.toggle("open");m.setAttribute("aria-expanded",a)};
+  n.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{n.classList.remove("open");m.setAttribute("aria-expanded","false")}));
+})();

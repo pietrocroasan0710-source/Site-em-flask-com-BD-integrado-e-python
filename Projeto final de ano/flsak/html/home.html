@@ -11,8 +11,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
 <script>try{var t=localStorage.getItem("tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="../CSS/style.css">
-<script src="../JAVA/fx.js" defer></script>
-<script src="../JAVA/script.js" defer></script>
+<script src="../JS/fx.js" defer></script>
+<script src="../JS/dados.js" defer></script>
+<script src="../JS/script.js" defer></script>
 </head>
 <body>
 <canvas id="bg" aria-hidden="true"></canvas>
@@ -22,15 +23,15 @@
 
 <header>
   <button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
-  <a class="logo" href="/">Pixel<span>Shelf</span></a>
+  <a class="logo" href="./home.html">Pixel<span>Shelf</span></a>
   <nav id="nav">
-    <a href="">Início</a>
-    <a href="/jogos">Jogos</a>
-    <a href="/jogos/novo">Cadastrar jogo</a>
-    <a href="/favoritos">Favoritos</a>
-    <button class="btn tema" id="tema" type="button" aria-label="Alternar entre tema claro e escuro"></button>
+    <a href="./home.html" aria-current="page">Início</a>
+    <a href="./jogos.html">Jogos</a>
+    <a href="./cadastrar-jogo.html">Cadastrar jogo</a>
+    <a href="./favoritos.html">Favoritos</a>
+    <button class="btn tema" id="tema" type="button" aria-label="Alternar entre tema claro e escuro">Tema</button>
     <a class="btn" href="./login.html">Entrar</a>
-    <a class="btn primary" href="./login.html">Criar conta</a>
+    <a class="btn primary" href="./registro.html">Criar conta</a>
   </nav>
 </header>
 
@@ -58,7 +59,7 @@
       <h2>Jogo do mês: Hollow Orbit</h2>
       <p>Explore uma estação espacial abandonada, resolva enigmas de gravidade e descubra por que ninguém voltou de lá.</p>
       <div class="stars">★★★★★</div>
-      <a class="btn primary" href="/jogos/1">Ver detalhes</a>
+      <a class="btn primary" href="./jogo.html?id=1">Ver detalhes</a>
     </div>
   </section>
 
@@ -66,7 +67,7 @@
   <div class="chips rv" id="chips"></div>
 
   <div class="section-title rv"><h2>Jogos em destaque</h2><small id="count"></small></div>
-  <div class="grid" id="grid"></div>
+  <div class="grid" id="grid"><p class="empty">Carregando jogos… Se esta mensagem não sumir, o JavaScript não carregou: confira se a pasta JAVA está ao lado da pasta html.</p></div>
 
   <div class="section-title rv"><h2>Mais bem avaliados</h2></div>
   <ol class="rank rv" id="rank"></ol>
@@ -81,15 +82,15 @@
   <section class="cta rv">
     <h2>Pronto para montar sua estante?</h2>
     <p>Crie sua conta e comece a guardar os jogos que você ama.</p>
-    <a class="btn primary" href="/registro">Criar conta grátis</a>
+    <a class="btn primary" href="./registro.html">Criar conta grátis</a>
   </section>
 </main>
 
 <footer>
   <div class="foot">
-    <div><a class="logo" href="/">Pixel<span>Shelf</span></a><p>Catálogo de jogos.</p></div>
-    <div><h4>Site</h4><a href="/jogos">Jogos</a><a href="/favoritos">Favoritos</a><a href="/jogos/novo">Cadastrar jogo</a></div>
-    <div><h4>Conta</h4><a href="/login">Entrar</a><a href="/registro">Criar conta</a></div>
+    <div><a class="logo" href="./home.html">Pixel<span>Shelf</span></a><p>Catálogo de jogos.</p></div>
+    <div><h4>Site</h4><a href="./jogos.html">Jogos</a><a href="./favoritos.html">Favoritos</a><a href="./cadastrar-jogo.html">Cadastrar jogo</a></div>
+    <div><h4>Conta</h4><a href="./login.html">Entrar</a><a href="./registro.html">Criar conta</a></div>
   </div>
 </footer>
 <button class="topo" id="topo" type="button" aria-label="Voltar ao topo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>
