@@ -1024,19 +1024,27 @@ footer small {
   }
 
   header nav {
+    display: flex;
+    width: auto;
+    margin-left: auto;
+  }
+
+  header nav > a,
+  header nav > a.btn {
     display: none;
+  }
 
+  header nav.open {
     width: 100%;
-
     flex-direction: column;
     align-items: stretch;
-
     gap: 10px;
     padding-top: 10px;
   }
 
-  header nav.open {
-    display: flex;
+  header nav.open > a,
+  header nav.open > a.btn {
+    display: block;
   }
 
   header nav a,
@@ -1090,3 +1098,53 @@ footer small {
 .forca[data-n="2"] i:nth-child(-n+2){background:var(--gold)}
 .forca[data-n="3"] i:nth-child(-n+3),.forca[data-n="4"] i:nth-child(-n+4){background:var(--cyan)}
 .dica{display:block;margin-top:5px;color:var(--muted);font-size:.8rem}
+/* ---------- páginas internas (jogos, detalhes, cadastrar, favoritos) ---------- */
+nav a[aria-current]{color:var(--text);font-weight:600}
+.pagina{max-width:1100px;margin:0 auto}
+.topo-pagina{padding:48px 0 22px}
+.topo-pagina h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.topo-pagina p{color:var(--muted);margin-top:8px;max-width:52ch}
+.pagina .chips{margin-top:16px}
+.voltar{display:inline-block;margin-top:28px;color:var(--muted)}
+.voltar:hover{color:var(--text)}
+.detalhe{display:grid;grid-template-columns:minmax(200px,320px) 1fr;gap:32px;margin-top:20px;align-items:start}
+.detalhe[hidden],#avals[hidden],#vazio[hidden]{display:none}
+.detalhe .cover{height:auto;aspect-ratio:3/4;font-size:1.8rem;border-radius:20px}
+.detalhe h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.05;font-weight:800;letter-spacing:-.03em}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.tag{border:1px solid var(--line);border-radius:99px;padding:4px 12px;font-size:.85rem;color:var(--muted)}
+.nota-grande{display:flex;align-items:center;gap:14px;margin:6px 0 16px}
+.nota-grande b{font-size:2.6rem;line-height:1;color:var(--gold)}
+.nota-grande small{color:var(--muted)}
+.detalhe #desc{max-width:56ch;margin-bottom:18px}
+#fav{cursor:pointer;font:inherit;font-weight:600;background:transparent}
+#fav[aria-pressed="true"]{color:var(--pink);border-color:var(--pink)}
+.avaliacoes{display:grid;grid-template-columns:minmax(260px,420px) 1fr;gap:28px;margin-top:20px;align-items:start}
+.avaliacoes h2{font-size:1.5rem;margin-bottom:8px}
+.coment{border-bottom:1px solid var(--line);padding:14px 0}
+.coment p{margin-top:6px}
+.linha-c{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.linha-c small{color:var(--muted);margin-left:auto}
+.estrelas-input{display:flex;flex-direction:row-reverse;justify-content:flex-end;margin-top:4px}
+.estrelas-input input{position:absolute;opacity:0;width:1px;height:1px}
+.estrelas-input label{margin:0!important;font-size:2rem;line-height:1;color:var(--line);cursor:pointer;padding:0 2px}
+.estrelas-input input:checked~label,.estrelas-input label:hover,.estrelas-input label:hover~label{color:var(--gold)}
+.estrelas-input input:focus-visible+label{outline:2px solid var(--cyan);border-radius:6px}
+.form-box.largo{max-width:none}
+.form-box h2{font-size:1.4rem}
+.form-box input[type=number],.form-box select,.form-box textarea{width:100%;margin-top:6px;background:var(--bg);border:1px solid var(--line);color:var(--text);padding:12px 14px;border-radius:10px;font:inherit}
+.form-box textarea{resize:vertical}
+.form-box select:focus,.form-box textarea:focus{border-color:var(--cyan)}
+.form-box textarea.inv,.form-box select.inv{border-color:var(--pink)}
+.opcoes{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:6px}
+.cores{display:flex;gap:10px;margin-top:6px}
+.cores input{width:56px;height:40px;padding:3px;border:1px solid var(--line);border-radius:10px;background:var(--bg);cursor:pointer}
+.duas{display:grid;grid-template-columns:1fr 280px;gap:28px;align-items:start}
+.previa{position:sticky;top:90px}
+.previa .meta{margin-bottom:8px}
+#vazio{margin-top:30px;text-align:center}
+@media (max-width:800px){
+  .detalhe,.avaliacoes,.duas{grid-template-columns:1fr}
+  .detalhe .cover{aspect-ratio:16/9}
+  .previa{position:static;order:-1}
+}
